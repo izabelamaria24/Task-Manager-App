@@ -1,7 +1,8 @@
 import React from 'react'
-import landing from '../assets/landing.svg'
-import logo from '../assets/logo.png'
+import landing from '../assets/images/landing.svg'
+import logo from '../assets/images/logo.png'
 import Wrapper from '../assets/wrappers/Landing'
+import { Link } from 'react-router-dom'
 
 const Landing = () => {
   return (
@@ -10,8 +11,11 @@ const Landing = () => {
       <section className='landing-content'>
         <h1>Welcome to Blossom!</h1>
         <section className='btn-container'>
-          <button className='btn btn-block register-btn'>Register</button>
-          <button className='btn btn-block login-btn'>Login</button>
+          <Link to='/register'>
+            <button className='btn btn-block register-btn'>
+              Login / Register
+            </button>
+          </Link>
         </section>
       </section>
       <section className='landing-image'>

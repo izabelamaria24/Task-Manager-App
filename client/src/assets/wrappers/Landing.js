@@ -13,7 +13,6 @@ const Wrapper = styled.section`
     flex-direction: column;
     .btn-container {
       width: 30%;
-      display: flex;
       .btn {
         padding: 5%;
         margin: 1rem 1rem 0 0;
