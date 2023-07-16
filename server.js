@@ -9,6 +9,7 @@ import errorHandler from './middleware/errorHandler.js'
 
 import authRouter from './routes/authRoutes.js'
 import morgan from 'morgan'
+import cookieParser from 'cookie-parser'
 
 // set express server
 const app = express()
@@ -16,9 +17,12 @@ const app = express()
 // dotenv
 dotenv.config()
 
+app.set('trust proxy', 1)
+
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'))
 }
+app.use(cookieParser(process.env.JWT_SECRET))
 
 app.use(express.json())
 
