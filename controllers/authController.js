@@ -44,8 +44,11 @@ const login = async (req, res) => {
   const userToken = createUserToken(user)
   attachCookiesToResponse(res, userToken)
 
-  const { _id } = user
-  res.status(StatusCodes.OK).json({ user: { email, _id }, token: userToken })
+  const { _id, name } = user
+
+  res
+    .status(StatusCodes.OK)
+    .json({ user: { email, name, _id }, token: userToken })
 }
 
 const logout = async (req, res) => {
@@ -57,4 +60,12 @@ const logout = async (req, res) => {
   res.status(StatusCodes.OK).send('Logout')
 }
 
-export { register, login, logout }
+const getCurrentUser = async (req, res) => {
+  const { userId } = req.user
+
+  const user = await User.findOne({ _id: userId })
+
+  res.status(StatusCodes.OK).json({ user })
+}
+
+export { register, login, logout, getCurrentUser }

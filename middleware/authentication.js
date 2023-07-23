@@ -1,8 +1,8 @@
 import { Unauthenticated } from '../errors/index.js'
-import { isTokenValid } from '../utils/jwt'
+import { isTokenValid } from '../utils/jwt.js'
 
 const authenticateUser = (req, res, next) => {
-  const { token } = res.signedCookies
+  const { token } = req.signedCookies
 
   if (!token) {
     throw new Unauthenticated('Token invalid')

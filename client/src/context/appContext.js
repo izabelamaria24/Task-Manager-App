@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react'
+import React, { useReducer, useContext, useEffect } from 'react'
 
 import reducer from './reducer'
 
@@ -11,10 +11,22 @@ import {
   REGISTER_USER_BEGIN,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_ERROR,
+  GET_CURRENT_USER_BEGIN,
+  GET_CURRENT_USER_SUCCESS,
+  LOGOUT_SUCCESS,
+  SHOW_ALERT,
+  CLEAR_ALERT,
+  TOGGLE_SIDEBAR,
 } from './actions'
 
 const initialState = {
+  userLoading: true,
   user: null,
+  isLoading: false,
+  showAlert: false,
+  alertText: '',
+  alertType: '',
+  showSidebar: true,
 }
 
 const AppContext = React.createContext()
@@ -22,15 +34,95 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  // const login = () => {
-  //   dispatch(LOGIN_USER_BEGIN)
+  const authFetch = axios.create({
+    baseURL: '/api/v1/auth',
+  })
 
-  //   try {
-  //     // const {data} = axios.post("/api/v1/auth/login", user)
-  //   }
+  authFetch.interceptors.response.use(
+    (response) => {
+      return response
+    },
+    (error) => {
+      if (error.response.status === 401) logout()
+      return Promise.reject(error)
+    }
+  )
+
+  const toggleSidebar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR })
+  }
+
+  const displayAlert = (alertType, alertText) => {
+    dispatch({ type: SHOW_ALERT, payload: { alertType, alertText } })
+    clearAlert()
+  }
+
+  const clearAlert = () => {
+    setTimeout(() => {
+      dispatch({ type: CLEAR_ALERT })
+    }, 3000)
+  }
+
+  const logout = async () => {
+    await authFetch.get('/logout')
+    dispatch({ type: LOGOUT_SUCCESS })
+    clearAlert()
+  }
+
+  const register = async (user) => {
+    dispatch({ type: REGISTER_USER_BEGIN })
+    try {
+      const { data } = await authFetch.post('/register', user)
+
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user })
+    } catch (error) {
+      dispatch({ type: REGISTER_USER_ERROR })
+    }
+    clearAlert()
+  }
+
+  const login = async (user) => {
+    dispatch({ type: LOGIN_USER_BEGIN })
+    try {
+      const { data } = await authFetch.post('/login', user)
+
+      console.log(user)
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: data.user })
+    } catch (error) {
+      dispatch({ type: LOGIN_USER_ERROR })
+    }
+    clearAlert()
+  }
+
+  const getCurrentUser = async () => {
+    dispatch({ type: GET_CURRENT_USER_BEGIN })
+    try {
+      const { data } = await authFetch.get('/getCurrentUser')
+
+      dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: data.user })
+    } catch (error) {
+      logout()
+    }
+  }
+
+  useEffect(() => {
+    getCurrentUser()
+  }, [])
 
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider
+      value={{
+        ...state,
+        login,
+        register,
+        getCurrentUser,
+        displayAlert,
+        clearAlert,
+        toggleSidebar,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
   )
 }
 

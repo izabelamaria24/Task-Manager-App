@@ -47,13 +47,23 @@ html {
   --scheme4-3: #ffb8cc;
   --scheme4-4: #e5aca8;
 
+  --success-1: #ebf7ee;
+  --success-2: #bee5c8;
+  --info-1: #e5effa;
+  --info-2: #e5effa;
+  --warning-1: #fef7ea;
+  --warning-2: #fadeaf;
+  --error-1: #fcedea;
+  --error-2: #f6ccc4;
+
+  --height: 10vh;
   --padding: 8%;
   --border-radius: 0.25rem;
 }
 
 body {
-  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   line-height: 1;
 }
@@ -72,7 +82,6 @@ button {
 .btn {
   cursor: pointer;
   color: var(--white);
-  background: var(--dark1);
   border: transparent;
   border-radius: var(--border-radius);
   letter-spacing: var(--letter-spacing);

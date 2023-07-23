@@ -1,6 +1,13 @@
 import { Landing, Error, Register, ProtectedRoute } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppProvider } from './context/appContext'
+import {
+  SharedLayout,
+  Stats,
+  CurrentTasks,
+  Profile,
+  AddTask,
+} from './pages/dashboard'
 
 const App = () => {
   return (
@@ -11,10 +18,15 @@ const App = () => {
             path='/'
             element={
               <ProtectedRoute>
-                <h1>Home page</h1>
+                <SharedLayout />
               </ProtectedRoute>
             }
-          ></Route>
+          >
+            <Route index element={<CurrentTasks />}></Route>
+            <Route path='/stats' element={<Stats />}></Route>
+            <Route path='/profile' element={<Profile />}></Route>
+            <Route path='/add-task' element={<AddTask />}></Route>
+          </Route>
           <Route path='/landing' element={<Landing />}></Route>
           <Route path='/register' element={<Register />}></Route>
           <Route path='*' element={<Error />}></Route>
