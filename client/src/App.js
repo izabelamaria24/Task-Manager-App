@@ -7,6 +7,7 @@ import {
   CurrentTasks,
   Profile,
   AddTask,
+  Lists,
 } from './pages/dashboard'
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
             <Route path='/stats' element={<Stats />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/add-task' element={<AddTask />}></Route>
+            <Route path='/lists' element={<Lists />}></Route>
           </Route>
           <Route path='/landing' element={<Landing />}></Route>
           <Route path='/register' element={<Register />}></Route>

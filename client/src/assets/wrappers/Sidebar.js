@@ -4,6 +4,7 @@ const Sidebar = styled.aside`
   .sidebar-container {
     background-color: var(--scheme3-3);
     height: 100vh;
+    position: sticky;
 
     visibility: hidden;
     width: 0;

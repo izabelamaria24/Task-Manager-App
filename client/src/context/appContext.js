@@ -17,6 +17,9 @@ import {
   SHOW_ALERT,
   CLEAR_ALERT,
   TOGGLE_SIDEBAR,
+  ADD_TASK_BEGIN,
+  ADD_TASK_SUCCESS,
+  ADD_TASK_ERROR,
 } from './actions'
 
 const initialState = {
@@ -36,6 +39,10 @@ const AppProvider = ({ children }) => {
 
   const authFetch = axios.create({
     baseURL: '/api/v1/auth',
+  })
+
+  const tasksFetch = axios.create({
+    baseURL: '/api/v1/tasks',
   })
 
   authFetch.interceptors.response.use(
@@ -105,6 +112,19 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const addTask = async (task) => {
+    dispatch({ type: ADD_TASK_BEGIN })
+
+    try {
+      await tasksFetch.post('/', task)
+      dispatch({ type: ADD_TASK_SUCCESS })
+    } catch (error) {
+      dispatch({ type: ADD_TASK_ERROR })
+    }
+
+    clearAlert()
+  }
+
   useEffect(() => {
     getCurrentUser()
   }, [])
@@ -119,6 +139,7 @@ const AppProvider = ({ children }) => {
         displayAlert,
         clearAlert,
         toggleSidebar,
+        addTask,
       }}
     >
       {children}

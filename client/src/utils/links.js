@@ -14,6 +14,11 @@ const links = [
     name: 'add task',
     link: '/add-task',
   },
+  {
+    id: 4,
+    name: 'my lists',
+    link: '/lists',
+  },
 ]
 
 export default links

@@ -11,6 +11,9 @@ import {
   CLEAR_ALERT,
   SHOW_ALERT,
   TOGGLE_SIDEBAR,
+  ADD_TASK_BEGIN,
+  ADD_TASK_SUCCESS,
+  ADD_TASK_ERROR,
 } from './actions'
 
 const reducer = (state, action) => {
@@ -98,6 +101,30 @@ const reducer = (state, action) => {
 
   if (action.type === TOGGLE_SIDEBAR) {
     return { ...state, showSidebar: !state.showSidebar }
+  }
+
+  if (action.type === ADD_TASK_BEGIN) {
+    return { ...state, isLoading: true }
+  }
+
+  if (action.type === ADD_TASK_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Task added!',
+    }
+  }
+
+  if (action.type === ADD_TASK_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'error',
+      alertText: 'Failed to add task!',
+    }
   }
 }
 
