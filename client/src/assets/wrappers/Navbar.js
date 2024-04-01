@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const Navbar = styled.nav`
+  z-index: 100;
   position: sticky;
   top: 0;
   display: flex;
