@@ -29,17 +29,16 @@ const Social = () => {
           value={searchValue}
           onChange={handleChange}
         />
-        <Link to='/social/requests'>{`{}Requests ${friendRequests.length}`}</Link>
+        <Link to='/social/requests'>{friendRequests.length === 0 ? 'No friend requests' : `${friendRequests.length} Friend Requests`}</Link>
       </div>
 
-      <section>
+      <section className='possible-requests'>
         {users &&
           users.map((currentUser) => {
-            console.log(currentUser._id)
             return (
               <article>
-                <div>{currentUser.name}</div>
-                <button onClick={() => sendFriendRequest(currentUser._id)}>
+                <div className= 'request-username'>{currentUser.name}</div>
+                <button className='btn design-btn' onClick={() => sendFriendRequest(currentUser._id)}>
                   Friend request
                 </button>
               </article>

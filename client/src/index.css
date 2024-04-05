@@ -130,7 +130,7 @@ button:disabled {
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
-  color: #111;
+  color: var(--scheme2-1);
   cursor: pointer;
   display: flex;
   font-family: Inter, sans-serif;

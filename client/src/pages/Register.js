@@ -88,7 +88,7 @@ const Register = () => {
               <button
                 type='submit'
                 onClick={(e) => handleSubmit(e)}
-                className='btn register-btn'
+                className='btn design-btn'
               >
                 {`${isMember ? 'Login' : 'Register'}`}
               </button>

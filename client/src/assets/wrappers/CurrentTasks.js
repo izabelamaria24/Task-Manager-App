@@ -13,9 +13,9 @@ const CurrentTasks = styled.section`
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 2rem;
     row-gap: 2rem;
-
+    
     article {
-      padding: 3%;
+      padding: 5%;
       background-color: var(--scheme1-red);
       color: white;
       border-radius: 2%;
@@ -33,6 +33,7 @@ const CurrentTasks = styled.section`
         h1 {
           padding: 0.5rem 0;
           font-size: 1rem;
+          color: var(--scheme2-1);
         }
 
         .line {
@@ -82,7 +83,7 @@ const CurrentTasks = styled.section`
     label {
       position: relative;
       cursor: pointer;
-      font-size: 1.5em;
+      font-size: 1.2em;
       font-weight: 600;
       padding: 0 0.25em 0;
       user-select: none;
@@ -96,6 +97,12 @@ const CurrentTasks = styled.section`
         text-decoration-color: #9c9e9f;
         transition: clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .calendar {
+      grid-template-columns: 1fr 1fr;
     }
   }
 `

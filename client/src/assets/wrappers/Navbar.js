@@ -20,7 +20,7 @@ const Navbar = styled.nav`
 
   .profile-btn-section-toggle {
     width: 100%;
-    background-color: black;
+    background-color: #ff7461;
     height: 0;
     position: absolute;
     top: 110%;
@@ -37,8 +37,16 @@ const Navbar = styled.nav`
     button {
       display: none;
       transition: all 0.3s ease-in-out;
-      color: black;
+      background-color: white;
+      font-weight: bold;
+      color: var(--scheme2-1);
     }
+  }
+  
+  .profile-btn-section-toggle {
+       a {
+         color: var(--scheme2-1);
+       }
   }
 
   .on {

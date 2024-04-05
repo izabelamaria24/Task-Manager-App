@@ -21,7 +21,7 @@ const Sidebar = styled.aside`
     .sidebar-link {
       text-transform: capitalize;
       font-size: 1.5rem;
-      color: var(--dark2);
+      color: var(--scheme2-1);
       text-decoration-line: none;
     }
   }
@@ -29,6 +29,20 @@ const Sidebar = styled.aside`
   .show-sidebar {
     visibility: visible;
     width: 300px;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 3;
+    }
+    .show-sidebar {
+      width: 100%;
+    }
   }
 `
 

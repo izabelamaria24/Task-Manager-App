@@ -69,10 +69,12 @@ const Register = styled.section`
         .btn {
           width: 8rem;
           height: 3rem;
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           font-weight: 500;
           background-color: var(--scheme4-2);
           color: var(--dark2);
+          font-weight: bold;
+          margin-bottom: 1rem;
         }
 
         .link-container {
