@@ -19,6 +19,11 @@ const links = [
     name: 'my lists',
     link: '/lists',
   },
+  {
+    id: 5,
+    name: 'social',
+    link: '/social',
+  },
 ]
 
 export default links

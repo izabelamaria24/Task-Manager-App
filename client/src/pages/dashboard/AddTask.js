@@ -1,17 +1,38 @@
 import Wrapper from '../../assets/wrappers/AddTask'
 import RadioFormRow from '../../components/RadioFormRow'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useAppContext } from '../../context/appContext'
 import Alert from '../../components/Alert'
 import categories from '../../utils/categories'
+import Calendar from '../../components/Calendar'
 
 const AddTask = () => {
+  const currentDate = new Date()
   const { displayAlert, addTask, showAlert, isLoading } = useAppContext()
 
-  const [task, setTask] = useState({ category: '', title: '' })
+  const [task, setTask] = useState({
+    category: '',
+    title: '',
+    time: {
+      hour: '',
+      date: {
+        selectedDay: currentDate.getDate(),
+        selectedMonth: currentDate.getMonth(),
+        selectedYear: currentDate.getFullYear(),
+      },
+    },
+  })
 
   const handleChange = (e) => {
-    setTask({ ...task, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+
+    setTask((prevTask) => ({
+      ...prevTask,
+      [name]:
+        typeof prevTask[name] === 'object'
+          ? { ...prevTask[name], [e.target.dataset.nested]: value }
+          : value,
+    }))
   }
 
   const handleSubmit = (e) => {
@@ -23,13 +44,24 @@ const AddTask = () => {
     }
 
     addTask(task)
-    setTask({ category: '', title: '' })
+    setTask({
+      category: '',
+      title: '',
+      time: {
+        hour: '',
+        date: {
+          selectedDay: currentDate.getDate(),
+          selectedMonth: currentDate.getMonth(),
+          selectedYear: currentDate.getFullYear(),
+        },
+      },
+    })
   }
 
   return (
     <Wrapper>
       {showAlert && <Alert />}
-      <h1>AddTask</h1>
+      <h1 className='add-task-subsection'>AddTask</h1>
       <form action='submit'>
         <input
           onChange={handleChange}
@@ -40,7 +72,7 @@ const AddTask = () => {
           placeholder='What are you planning?'
         />
 
-        <h1>Select task category: </h1>
+        <h1 className='add-task-subsection'>Select task category: </h1>
 
         <section className='categories'>
           {categories.map((category) => {
@@ -58,10 +90,26 @@ const AddTask = () => {
           })}
         </section>
 
+        <h1 className='add-task-subsection'>Select task date:</h1>
+
+        <h1 className='add-task-subsection calendar-title'>When do you plan to finish the task?</h1>
+
+        <Calendar task={task} setTask={setTask} />
+
+        <h2 className='add-task-subsection'>Select hour:</h2>
+        <input
+          onChange={handleChange}
+          name='time'
+          type='time'
+          value={task.time.hour}
+          data-nested='hour'
+          className='select-hour'
+        ></input>
+
         <button
           onClick={handleSubmit}
           type='submit'
-          className='btn add-task-btn'
+          className='btn design-btn'
           disabled={isLoading}
         >
           Add Task

@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-const getDates = () => {
+const getDates = (countDays) => {
   // Get the current date
   const currentDate = moment()
 
@@ -9,13 +9,13 @@ const getDates = () => {
   const nextSevenDays = []
 
   // Loop through the last 7 days and add each date to the array
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < countDays; i++) {
     const date = currentDate.clone().subtract(i, 'days')
     lastSevenDays.push(date.format('ddd-MMM-DD'))
   }
 
   // Loop through the next 7 days and add each date to the array
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < countDays; i++) {
     const date = currentDate.clone().add(i, 'days')
     nextSevenDays.push(date.format('ddd-MMM-DD'))
   }

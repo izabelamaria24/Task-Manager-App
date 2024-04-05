@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 const ListItemSchema = new mongoose.Schema(
   {
     description: {
+      required: true,
       type: String,
       maxLength: 500,
     },

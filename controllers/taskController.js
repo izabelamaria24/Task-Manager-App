@@ -1,4 +1,5 @@
 import Task from '../models/Task.js'
+import User from '../models/User.js'
 import { StatusCodes } from 'http-status-codes'
 import { BadRequest, NotFound } from '../errors/index.js'
 
@@ -23,7 +24,7 @@ const getSingleTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   const { id } = req.params
-  const { title, category } = req.body
+  const { score, title, category, time, completed } = req.body
 
   const task = await Task.findOne({ user: req.user.userId, _id: id })
 
@@ -35,21 +36,38 @@ const updateTask = async (req, res) => {
     throw new BadRequest('Please provide task title and category')
   }
 
+  task.score = score
   task.category = category
   task.title = title
+  task.time = time
+  task.completed = completed
+
   task.save()
 
-  res.status(StatusCodes.CREATED).json({ task })
+  const user = await User.findOne({ _id: req.user.userId })
+
+  const totalScore = await user.calculateTotalScore()
+
+  console.log(totalScore)
+
+  res.status(StatusCodes.CREATED).json({ task, totalScore })
 }
 
 const createTask = async (req, res) => {
-  const { category, title } = req.body
+  const { category, title, time, completed } = req.body
+  console.log(time)
 
-  if (!category || !title) {
+  if (!category || !title || !time) {
     throw new BadRequest('Please provide task title and category')
   }
 
-  const task = await Task.create({ user: req.user.userId, category, title })
+  const task = await Task.create({
+    user: req.user.userId,
+    category,
+    title,
+    time,
+    completed,
+  })
 
   res.status(StatusCodes.CREATED).json({ task })
 }

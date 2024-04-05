@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import TimePicker from 'react-time-picker'
 
 const Stats = () => {
-  return <div>Statsfafjaifjaifjfioajfoajfa</div>
+  return <div></div>
 }
 
 export default Stats

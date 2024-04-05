@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import { BadRequest, NotFound, Unauthenticated } from '../errors/index.js'
 import User from '../models/User.js'
 import { attachCookiesToResponse, createUserToken } from '../utils/index.js'
+import FriendRequest from '../models/FriendRequest.js'
 
 const register = async (req, res) => {
   const { email, password, name } = req.body
@@ -65,7 +66,27 @@ const getCurrentUser = async (req, res) => {
 
   const user = await User.findOne({ _id: userId })
 
-  res.status(StatusCodes.OK).json({ user })
+  const totalScore = await user.calculateTotalScore()
+
+  const friendRequests = await FriendRequest.find({ userTo: userId })
+
+  console.log(friendRequests)
+
+  res.status(StatusCodes.OK).json({ user, totalScore, friendRequests })
 }
 
-export { register, login, logout, getCurrentUser }
+const getAllUsers = async (req, res) => {
+  let users = await User.find({})
+
+  const { query } = req.query
+
+  users = users.filter((user) =>
+    user.name.toLowerCase().includes(query.toLowerCase())
+  )
+
+  if (query === '') users = []
+
+  res.status(StatusCodes.OK).json({ users })
+}
+
+export { register, login, logout, getCurrentUser, getAllUsers }

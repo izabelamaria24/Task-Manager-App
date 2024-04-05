@@ -11,14 +11,6 @@ const Wrapper = styled.section`
   .landing-content {
     display: flex;
     flex-direction: column;
-    .btn-container {
-      width: 30%;
-      .btn {
-        padding: 5%;
-        margin: 1rem 1rem 0 0;
-        font-size: 1.15rem;
-      }
-    }
   }
 
   h1 {

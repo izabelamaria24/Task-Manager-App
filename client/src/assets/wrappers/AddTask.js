@@ -21,6 +21,12 @@ const AddTask = styled.section`
     column-gap: 2rem;
     row-gap: 2rem;
   }
+  
+  .select-hour {
+    margin-top: 1rem;
+    width: 15%;
+    height: 2rem;
+  }
 
   .btn {
     margin-top: 2rem;

@@ -12,7 +12,7 @@ const Landing = () => {
         <h1>Welcome to Blossom!</h1>
         <section className='btn-container'>
           <Link to='/register'>
-            <button className='btn btn-block register-btn'>
+            <button className='btn btn-block design-btn'>
               Login / Register
             </button>
           </Link>

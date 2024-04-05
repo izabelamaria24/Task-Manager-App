@@ -12,12 +12,38 @@ const TaskSchema = new mongoose.Schema(
       required: [true, 'Please provide category'],
       enum: ['work', 'study', 'finance', 'personal'],
     },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
     user: {
-      type: mongoose.Schema.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
+    time: {
+      hour: {
+        type: String,
+        maxlength: 5,
+      },
+      date: {
+        selectedDay: {
+          type: Number,
+        },
+        selectedMonth: {
+          type: Number,
+        },
+        selectedYear: {
+          type: Number,
+        },
+      },
+    },
+    score: {
+      type: Number,
+      default: 0,
+    },
   },
+
   { timestamps: true }
 )
 

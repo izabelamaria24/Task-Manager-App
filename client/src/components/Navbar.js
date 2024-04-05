@@ -1,5 +1,4 @@
 import Wrapper from '../assets/wrappers/Navbar'
-import logo from '../assets/images/logo.png'
 import profileImg from '../assets/images/profile.png'
 import sidebarImg from '../assets/icons/sidebar.png'
 import { useState } from 'react'
@@ -8,16 +7,18 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [profile, toggleProfile] = useState(false)
-  const { toggleSidebar } = useAppContext()
+  const { toggleSidebar, logout } = useAppContext()
+
+  const logoutButton = () => {
+    toggleProfile(false)
+    logout()
+  }
 
   return (
     <Wrapper>
       <button onClick={toggleSidebar} className='btn sidebar-btn'>
         <img src={sidebarImg} />
       </button>
-      {/* <div className='nav-logo'>
-        <img src={logo} alt='nav-logo'></img>
-      </div> */}
 
       <section className='profile-btn-section'>
         <button
@@ -43,7 +44,7 @@ const Navbar = () => {
             <Link to='/profile'>Profile</Link>
           </button>
           <button
-            onClick={() => toggleProfile(false)}
+            onClick={logoutButton}
             className='btn btn-block'
           >
             Logout

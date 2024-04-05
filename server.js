@@ -11,6 +11,7 @@ import errorHandler from './middleware/errorHandler.js'
 import authRouter from './routes/authRoutes.js'
 import taskRouter from './routes/taskRoutes.js'
 import listsRouter from './routes/listRoutes.js'
+import socialRouter from './routes/socialRoutes.js'
 
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
@@ -34,6 +35,7 @@ app.use(express.json())
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/tasks', authenticateUser, taskRouter)
 app.use('/api/v1/lists', authenticateUser, listsRouter)
+app.use('/api/v1/social', authenticateUser, socialRouter)
 
 // error handling
 app.use(notFound)

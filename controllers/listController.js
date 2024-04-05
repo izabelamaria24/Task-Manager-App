@@ -18,13 +18,16 @@ const getSingleList = async (req, res) => {
     throw new NotFound(`No list found with id ${id}`)
   }
 
-  const listItems = await ListItem.find({ list: list._id })
+  const listItems = await ListItem.find({
+    list: list._id,
+  })
 
   res.status(StatusCodes.OK).json({ list, listItems })
 }
 
 const createList = async (req, res) => {
   const { listName } = req.body
+  console.log(listName)
 
   const list = await List.create({ user: req.user.userId, listName })
 
@@ -63,10 +66,10 @@ const deleteList = async (req, res) => {
 }
 
 const createListItem = async (req, res) => {
-  const { description } = req.body
+  const { listItemDescription } = req.body
   const { id } = req.params
 
-  if (!description) {
+  if (!listItemDescription) {
     throw new BadRequest('Please provide list item description')
   }
 
@@ -76,7 +79,10 @@ const createListItem = async (req, res) => {
     throw new NotFound(`No list found with id ${id}`)
   }
 
-  const listItem = await ListItem.create({ description, list: id })
+  const listItem = await ListItem.create({
+    description: listItemDescription,
+    list: id,
+  })
 
   res.status(StatusCodes.CREATED).json({ listItem })
 }
