@@ -2,6 +2,16 @@ import styled from 'styled-components'
 
 const AddTask = styled.section`
   padding: var(--padding);
+  
+  .add-task-form {
+    width: 100%;
+  }
+  
+  .add-task {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--scheme2-1);
+  }
 
   .task-title-input {
     padding: 0.5rem;
@@ -10,8 +20,9 @@ const AddTask = styled.section`
   }
   
   .add-task-subsection {
-    margin-top: 3rem;
     color: var(--scheme2-1);
+    font-size: 1.25rem;
+    margin-top: 5rem;
   }
 
   .categories {
@@ -27,9 +38,23 @@ const AddTask = styled.section`
     width: 15%;
     height: 2rem;
   }
+  
+  @media (max-width: 768px) {
+    .select-hour {
+      width: 40%; 
+    }
+  }
 
   .btn {
     margin-top: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .categories {
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      //width: 250px;
+    }    
   }
 `
 

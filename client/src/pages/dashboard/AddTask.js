@@ -61,8 +61,8 @@ const AddTask = () => {
   return (
     <Wrapper>
       {showAlert && <Alert />}
-      <h1 className='add-task-subsection'>AddTask</h1>
-      <form action='submit'>
+      <h1 className='add-task'>AddTask</h1>
+      <form className='add-task-form' action='submit'>
         <input
           onChange={handleChange}
           type='text'

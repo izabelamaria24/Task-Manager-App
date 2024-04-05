@@ -1,39 +1,8 @@
 import styled from 'styled-components'
 
 const Calendar = styled.section`
-  *,
-  :active {
-    outline: none;
-  }
-  * {
-    padding: 0px;
-    margin: 0px;
-  }
-
-  body {
-    margin: 20px;
-    background-color: #eeede9;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-size: 96.5%;
-    font-family: Helvetica, Arial, sans-serif;
-  }
-
   input {
     font-family: Helvetica, Arial, sans-serif;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    margin-bottom: 10px;
-  }
-
-  p {
-    line-height: 20px;
   }
 
   a {
@@ -54,12 +23,21 @@ const Calendar = styled.section`
   .calendar {
     border-radius: 4px;
     overflow: hidden;
-    width: 800px;
+    width: 50%;
     height: 450px;
     left: 50%;
     top: 50%;
     background-color: #ffffff;
     color: #333333;
+  }
+
+  @media (max-width: 768px) {
+    .calendar {
+      height: auto;
+      width: 100%;
+      display: grid;
+      grid-template-rows: 20% 80%;
+    }
   }
 
   .calendar h1,
@@ -68,7 +46,7 @@ const Calendar = styled.section`
     font-size: 26px;
     line-height: 28px;
     text-transform: uppercase;
-    margin: 0px 0px 20px 0px;
+    margin: 0 0 20px 0;
   }
 
   .calendar h1 span {
@@ -81,12 +59,13 @@ const Calendar = styled.section`
     height: 100%;
   }
 
+
   .calendar .col .content {
     padding: 40px;
   }
 
   .calendar ul {
-    margin: 0px;
+    margin: 0;
   }
 
   .calendar ul li {
@@ -96,6 +75,12 @@ const Calendar = styled.section`
   .calendar .leftCol {
     width: 40%;
     background-color: #f48989;
+  }
+  
+  @media (max-width: 768px) {
+    .calendar .leftCol {
+      width: 100%;
+    }
   }
 
   .calendar .noteList li {
@@ -146,6 +131,12 @@ const Calendar = styled.section`
   .calendar .rightCol {
     width: 60%;
   }
+  
+  @media (max-width: 768px) {
+    .calendar .rightCol {
+      width: 100%;
+    }
+  }
 
   .calendar .rightCol h2 {
     color: #c7bebe;
@@ -195,11 +186,10 @@ const Calendar = styled.section`
     width: 36px;
     height: 24px;
     text-align: center;
-    margin: auto auto;
     font-size: 12px;
     font-weight: bold;
     border-radius: 12px;
-    margin-bottom: 10px;
+    margin: auto auto 10px;
     padding-top: 10px;
   }
 
@@ -217,15 +207,19 @@ const Calendar = styled.section`
   }
 
   /* placeholder color */
+
   ::-webkit-input-placeholder {
     color: #ffffff;
   }
+
   :-moz-placeholder {
     color: #ffffff;
   }
+
   ::-moz-placeholder {
     color: #ffffff;
   }
+
   :-ms-input-placeholder {
     color: #ffffff;
   }

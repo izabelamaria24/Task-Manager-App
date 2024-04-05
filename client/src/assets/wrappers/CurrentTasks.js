@@ -6,6 +6,7 @@ const CurrentTasks = styled.section`
   .username {
     margin-bottom: 2rem;
     font-size: 2rem;
+    color: var(--scheme2-1);
   }
 
   .calendar {

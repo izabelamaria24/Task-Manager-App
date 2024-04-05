@@ -22,7 +22,7 @@ const RadioFormRow = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-transform: capitalize;
 
     img {
