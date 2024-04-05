@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAppContext } from '../../context/appContext'
+import Wrapper from '../../assets/wrappers/SingleList'
 
 const SingleList = () => {
   const { id } = useParams()
@@ -24,14 +25,16 @@ const SingleList = () => {
   }
 
   return (
-    <section>
-      <h1>{activeList.listName}</h1>
-      <div>
-        {activeList.listItems.map((listItem) => (
-          <h2 key={listItem._id}>{listItem.description}</h2>
-        ))}
-      </div>
-    </section>
+  <Wrapper>
+      <section>
+        <h1 className='list-name'>{activeList.listName}</h1>
+        <ul className='list-items'>
+          {activeList.listItems.map((listItem) => (
+            <li key={listItem._id}>{listItem.description}</li>
+          ))}
+        </ul>
+      </section>
+  </Wrapper>
   )
 }
 
