@@ -1,0 +1,17 @@
+Partea de Backend/Database explicata.
+
+Pentru organizarea datelor folosesc o baza de date non-relationala, MongoDB.
+Pentru server-side folosesc ExpressJS (un framework pentru NodeJS).
+
+In fisierul server.js configurez serverul, dar si alte lucruri suplimentare, cum ar fi cookie parser sau trust proxy.
+Serverul nu va porni in cazul in care sunt probleme cu baza de date. (acesta e rolul try/catch-ului din functia start).
+
+Sunt folosite middleware-uri pentru a gestiona eventualele erori.
+Middleware-ul 'authenticateUser' este folosit pentru a gestiona autentificarea userilor.
+
+Folderul 'routes' contine gestiunea rutelor, iar folderul 'controllers' contine functiile corespunzatoare fiecarei rute.
+In folderul 'models' se afla modelele din baza de date.
+
+Pentru criptarea parolelor userilor folosesc bcrypt, un NPM package.
+In folderul 'utils' am cateva functii care cuprind logica de creare a tokenurilor userilor. (folosesc JWT)
+Cand un user se autentifica, se creeaza un JWT si il ataseaza ca un cookie la raspunsul HTTP.
